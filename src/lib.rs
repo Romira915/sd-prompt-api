@@ -1,3 +1,7 @@
+mod entity;
+mod infrastructure;
+pub mod service_handler;
+
 use async_once_cell::OnceCell;
 use aws_sdk_dynamodb::Client;
 use dotenv::dotenv;

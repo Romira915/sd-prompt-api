@@ -8,7 +8,10 @@ use lambda_http::{
 };
 use log::LevelFilter;
 use once_cell::sync::Lazy;
-use sd_prompt_api::CLIENT;
+use sd_prompt_api::{
+    service_handler::{get_prompt_handler, post_prompt_handler},
+    CLIENT,
+};
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 use simplelog::{CombinedLogger, ConfigBuilder, TermLogger};
@@ -28,11 +31,11 @@ async fn function_handler(event: Request) -> Result<Response<Body>, Error> {
     let resp = match (event.method(), resource_path.as_ref()) {
         (&Method::GET, "/prompt") => {
             log::debug!("GET /prompt");
-            todo!()
+            get_prompt_handler(&event).await?
         }
         (&Method::POST, "/prompt") => {
             log::debug!("POST /prompt");
-            todo!()
+            post_prompt_handler(&event).await?
         }
         _ => Response::builder()
             .status(200)

@@ -1,0 +1,15 @@
+{
+  "name": "sd-prompt-api",
+  "version": "1.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Romira915/sd-prompt-api.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Romira915/sd-prompt-api/issues"
+  },
+  "homepage": "https://github.com/Romira915/sd-prompt-api#readme"
+}

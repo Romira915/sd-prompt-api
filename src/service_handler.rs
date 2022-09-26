@@ -1,5 +1,5 @@
 use anyhow::{Context, Result};
-use lambda_http::{Body, Request, Response};
+use lambda_http::{http::HeaderValue, Body, Request, Response};
 use serde_json::json;
 
 use crate::{
@@ -8,7 +8,11 @@ use crate::{
 };
 
 pub async fn get_prompt_handler(event: &Request) -> Result<Response<Body>> {
-    let prompt = get_prompt(0).await?;
+    let request_id = match event.headers().get("ai-draw-id") {
+        Some(h) => h.to_str()?.parse()?,
+        None => 0,
+    };
+    let prompt = get_prompt(request_id).await?;
 
     let resp = Response::builder()
         .status(200)
